@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BtnEmptyView" parent="Widget.AppCompat.Button.Borderless">
+        <item name="colorButtonNormal">@color/empty_view_default_color</item>
+    </style>
+
+</resources>

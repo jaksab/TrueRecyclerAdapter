@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TrueRecycler</string>
+    <string name="content_description_empty_view">Empty view icon</string>
+</resources>
