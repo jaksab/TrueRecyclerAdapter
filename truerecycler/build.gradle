@@ -8,7 +8,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.1"
     }
     buildTypes {
         release {
@@ -19,7 +19,7 @@ android {
 }
 
 ext {
-    bintrayRepo = 'TrueRecyclerAdapter'
+    bintrayRepo = 'TrueRecycler'
     bintrayName = 'truerecycler'
 
     publishedGroupId = 'pro.oncreate.truerecycler'
@@ -31,7 +31,7 @@ ext {
     siteUrl = 'https://github.com/jaksab/TrueRecyclerAdapter'
     gitUrl = 'https://github.com/jaksab/TrueRecyclerAdapter.git'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 
     developerId = 'jaksab'
     developerName = 'Andrii Konovalenko'
@@ -45,8 +45,8 @@ ext {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
