@@ -2,6 +2,7 @@ package pro.oncreate.truerecycler;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -75,7 +76,7 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     /**
      * Empty view instance.
      */
-    private TrueEmptyView trueEmptyView;
+    private Object emptyView;
 
 
     //
@@ -644,11 +645,7 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
      */
     public void loadingFinish(boolean allLoaded) {
         this.allLoaded = allLoaded;
-        if (this.trueEmptyView != null && allLoaded && this.isEmpty()) {
-            trueEmptyView.empty();
-        } else if (this.trueEmptyView != null) {
-            trueEmptyView.reset();
-        }
+        emptyViewSyncState();
     }
 
     /**
@@ -699,12 +696,26 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     // Empty view
     //
 
-
-    public TrueEmptyView getTrueEmptyView() {
-        return trueEmptyView;
+    /**
+     * Use only EmptyViewAdapterInterface instance or ready-made solution: https://github.com/jaksab/EmptyView
+     */
+    public void setEmptyView(Object emptyView) {
+        if (emptyView instanceof EmptyViewAdapterInterface ||
+                emptyView.getClass().getName().equals("pro.oncreate.emptyview.EmptyView"))
+            this.emptyView = emptyView;
+        else
+            throw new NullPointerException("Use only EmptyViewAdapterInterface instance or ready-made solution: https://github.com/jaksab/EmptyView");
     }
 
-    public void setTrueEmptyView(TrueEmptyView trueEmptyView) {
-        this.trueEmptyView = trueEmptyView;
+    protected void emptyViewSyncState() {
+        try {
+            if (this.emptyView != null && allLoaded && this.isEmpty()) {
+                emptyView.getClass().getDeclaredMethod("empty").invoke(emptyView);
+            } else if (this.emptyView != null) {
+                emptyView.getClass().getDeclaredMethod("reset").invoke(emptyView);
+            }
+        } catch (Exception ignored) {
+            Log.e("TrueRecyclerView", "Add dependency to EmptyView");
+        }
     }
 }
