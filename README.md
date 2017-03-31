@@ -5,7 +5,7 @@ Multifunctional and user-friendly adapter for RecyclerView. Make you code simple
   
 ```groovy
 dependencies {
-    compile 'pro.oncreate.truerecycler:truerecycler:1.0.0'
+    compile 'pro.oncreate.truerecycler:truerecycler:1.0.2'
 }
 ```
 
