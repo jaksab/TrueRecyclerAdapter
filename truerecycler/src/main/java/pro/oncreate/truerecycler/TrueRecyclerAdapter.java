@@ -279,6 +279,17 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     }
 
     /**
+     * Add item to the collection.
+     */
+    public void add(int position, T item) {
+        if (item == null)
+            throw new NullPointerException("item is null");
+        ArrayList<T> items = new ArrayList<>();
+        items.add(position, item);
+        addAll(items);
+    }
+
+    /**
      * Clear all data in items collection.
      * By default set last loading false.
      *

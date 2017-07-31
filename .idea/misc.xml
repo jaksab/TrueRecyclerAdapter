@@ -3,6 +3,7 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="IdProvider" IDEtalkID="42241C21B14EE5FB4943A54E05F4CCA2" />
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
