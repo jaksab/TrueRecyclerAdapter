@@ -285,8 +285,8 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
         if (item == null)
             throw new NullPointerException("item is null");
         ArrayList<T> items = new ArrayList<>();
-        items.add(position, item);
-        addAll(items);
+        items.add(item);
+        addAll(position, items);
     }
 
     /**
@@ -551,9 +551,9 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
 
                             if (!isLoading() && !isAllLoaded()
                                     && totalItemCount <= (lastVisibleItem + visibleThreshold) && !items.isEmpty() && loadMoreCondition()) {
+                                loadingStartWithLoadMore();
                                 if (TrueRecyclerAdapter.this.loadMoreListener != null)
                                     TrueRecyclerAdapter.this.loadMoreListener.loadMore();
-                                loadingStartWithLoadMore();
                             }
                         }
                     });

@@ -2,13 +2,13 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    buildToolsVersion '25.0.3'
 
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 6
+        versionName "1.0.5"
     }
     buildTypes {
         release {
@@ -31,7 +31,7 @@ ext {
     siteUrl = 'https://github.com/jaksab/TrueRecyclerAdapter'
     gitUrl = 'https://github.com/jaksab/TrueRecyclerAdapter.git'
 
-    libraryVersion = '1.0.3'
+    libraryVersion = '1.0.5'
 
     developerId = 'jaksab'
     developerName = 'Andrii Konovalenko'
