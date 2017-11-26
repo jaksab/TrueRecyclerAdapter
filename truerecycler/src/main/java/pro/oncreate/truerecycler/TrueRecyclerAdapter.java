@@ -113,6 +113,29 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     }
 
 
+    /**
+     * Remove footer.
+     *
+     * @param position header position
+     */
+    public void removeFooter(int position) {
+        if (position >= headers.size() + items.size() && position < this.getItemCount()) {
+            this.footers.remove(position);
+            this.notifyItemRemoved(position);
+        }
+    }
+
+    /**
+     * Remove last footer.
+     */
+    public void removeFooter() {
+        if (!footers.isEmpty()) {
+            footers.remove(footers.size() - 1);
+            notifyItemRemoved(getItemCount());
+        }
+    }
+
+
     //
     // Get adapter basic data and states
     //
@@ -583,6 +606,14 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
      */
     public boolean isAllLoaded() {
         return allLoaded;
+    }
+
+
+    /**
+     * Set is loading all pages.
+     */
+    public void setAllLoaded(boolean allLoaded) {
+        this.allLoaded = allLoaded;
     }
 
     /**

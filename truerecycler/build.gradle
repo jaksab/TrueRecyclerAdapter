@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 6
-        versionName "1.0.5"
+        versionCode 9
+        versionName "1.0.8"
     }
     buildTypes {
         release {
@@ -16,6 +16,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
 }
 
 ext {
@@ -31,7 +37,7 @@ ext {
     siteUrl = 'https://github.com/jaksab/TrueRecyclerAdapter'
     gitUrl = 'https://github.com/jaksab/TrueRecyclerAdapter.git'
 
-    libraryVersion = '1.0.5'
+    libraryVersion = '1.0.8'
 
     developerId = 'jaksab'
     developerName = 'Andrii Konovalenko'
