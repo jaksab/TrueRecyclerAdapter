@@ -171,6 +171,13 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     }
 
     /**
+     * @return total count of items collection.
+     */
+    public int getFootersSize() {
+        return footers.size();
+    }
+
+    /**
      * @return true if 0 items in collection, false - contrariwise.
      */
     public boolean isEmpty() {
@@ -423,7 +430,9 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
         } else if (type >= VIEW_TYPES.HEADER) {
             itemLayoutView = headers.get(type - VIEW_TYPES.HEADER);
             TrueUtils.removeParent(itemLayoutView);
-            itemLayoutView.setLayoutParams(parent.getLayoutParams());
+            ViewGroup.LayoutParams lp = parent.getLayoutParams();
+            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            itemLayoutView.setLayoutParams(lp);
             return onCreateHeaderHolder(itemLayoutView, parent);
         } else if (type <= VIEW_TYPES.FOOTER) {
             itemLayoutView = footers.get(type - VIEW_TYPES.FOOTER);
