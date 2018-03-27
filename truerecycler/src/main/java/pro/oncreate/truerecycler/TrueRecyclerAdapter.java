@@ -288,10 +288,16 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
      *
      * @param items - not an empty collection.
      */
-    public void addAll(int position, ArrayList<T> items) {
-        if (items != null && position >= 0 && position < items.size()) {
+    public void addAll(int position, List<T> items) {
+        if (items == null)
+            return;
+        if (position >= items.size()) {
+            addAll(items);
+            return;
+        }
+        if (position >= 0) {
             this.items.addAll(position, items);
-            int from = headers.size() + position - items.size();
+            int from = headers.size() + position;
             int count = items.size();
             this.notifyItemRangeInserted(from, count);
         }
