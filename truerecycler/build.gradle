@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 16
-        versionName "1.0.15"
+        versionCode 17
+        versionName "1.0.16"
     }
     buildTypes {
         release {
@@ -37,7 +37,7 @@ ext {
     siteUrl = 'https://github.com/jaksab/TrueRecyclerAdapter'
     gitUrl = 'https://github.com/jaksab/TrueRecyclerAdapter.git'
 
-    libraryVersion = '1.0.15'
+    libraryVersion = '1.0.16'
 
     developerId = 'jaksab'
     developerName = 'Andrii Konovalenko'
