@@ -291,7 +291,7 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     public void addAll(int position, List<T> items) {
         if (items == null)
             return;
-        if (position >= items.size()) {
+        if (position >= this.items.size()) {
             addAll(items);
             return;
         }
@@ -462,6 +462,19 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
         } else onBindOtherHolder(holder, position);
     }
 
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
+        int type = getItemType(position);
+        if (type == VIEW_TYPES.NORMAL) {
+            onBindNormalHolder((VH) holder, position, getItem(getRelativeItemPosition(position)), payloads);
+        } else if (type >= VIEW_TYPES.HEADER) {
+            onBindHeaderHolder((DefaultHeaderViewHolder) holder, position, payloads);
+        } else if (type <= VIEW_TYPES.FOOTER) {
+            onBindFooterHolder((DefaultFooterViewHolder) holder, position, payloads);
+        } else onBindOtherHolder(holder, position);
+        onBindViewHolder(holder, position);
+    }
+
     /**
      * You must override this method for change header holder.
      *
@@ -518,6 +531,22 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     }
 
     public void onBindOtherHolder(RecyclerView.ViewHolder holder, int position) {
+
+    }
+
+    public void onBindNormalHolder(VH holder, int position, T model, List<Object> payloads) {
+
+    }
+
+    public void onBindHeaderHolder(DefaultHeaderViewHolder holder, int position, List<Object> payloads) {
+
+    }
+
+    public void onBindFooterHolder(DefaultFooterViewHolder holder, int position, List<Object> payloads) {
+
+    }
+
+    public void onBindOtherHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
 
     }
 
