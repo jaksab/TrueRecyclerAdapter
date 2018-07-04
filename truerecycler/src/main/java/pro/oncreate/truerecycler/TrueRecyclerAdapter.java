@@ -304,6 +304,32 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     }
 
     /**
+     * Set items collection, old data will be removed.
+     *
+     * @param items - not an empty collection.
+     */
+    public void set(List<T> items) {
+        if (items != null) {
+            this.items.clear();
+            this.items.addAll(items);
+            this.notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * Set items collection, old data will be removed.
+     *
+     * @param collection - not an empty collection.
+     */
+    public void set(Collection<? extends T> collection) {
+        if (items != null) {
+            this.items.clear();
+            this.items.addAll(collection);
+            this.notifyDataSetChanged();
+        }
+    }
+
+    /**
      * Add item to the collection.
      */
     public void add(T item) {
