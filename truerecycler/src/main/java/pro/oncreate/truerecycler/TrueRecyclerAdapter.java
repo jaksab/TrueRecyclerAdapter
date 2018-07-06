@@ -526,8 +526,8 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
         return new DefaultHeaderViewHolder(v);
     }
 
-    protected <FH extends RecyclerView.ViewHolder> FH onCreateHeaderHolder(ViewGroup parent) {
-        return null;
+    protected RecyclerView.ViewHolder onCreateHeaderHolder(ViewGroup parent) {
+        return new DefaultHeaderViewHolder(parent);
     }
 
     /**
@@ -541,8 +541,8 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
         return new DefaultFooterViewHolder(v);
     }
 
-    protected <FH extends RecyclerView.ViewHolder> FH onCreateFooterHolder(ViewGroup parent) {
-        return null;
+    protected RecyclerView.ViewHolder onCreateFooterHolder(ViewGroup parent) {
+        return new DefaultFooterViewHolder(parent);
     }
 
     /**
