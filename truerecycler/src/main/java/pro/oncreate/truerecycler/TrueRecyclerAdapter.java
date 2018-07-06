@@ -33,12 +33,12 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     /**
      * The collection of headers views.
      */
-    protected List<View> headers = new ArrayList<>();
+    protected List<Object> headers = new ArrayList<>();
 
     /**
      * The collection of footers views.
      */
-    protected List<View> footers = new ArrayList<>();
+    protected List<Object> footers = new ArrayList<>();
 
     /**
      * Load more state. Is load more now.
@@ -99,6 +99,23 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
         this.footers.add(v);
         notifyItemInserted(getItemCount() - 1);
     }
+
+    /**
+     * Add new header view.
+     */
+    public void addHeader(Object data) {
+        this.headers.add(data);
+        notifyItemInserted(headers.size() - 1);
+    }
+
+    /**
+     * Add new footer view.
+     */
+    public void addFooter(Object data) {
+        this.footers.add(data);
+        notifyItemInserted(getItemCount() - 1);
+    }
+
 
     /**
      * Remove header.
@@ -458,21 +475,31 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
         View itemLayoutView;
         if (type == VIEW_TYPES.NORMAL) {
-            return onCreateNormalHolder(parent);
+            return onCreateHolder(parent);
         } else if (type >= VIEW_TYPES.HEADER) {
-            itemLayoutView = headers.get(type - VIEW_TYPES.HEADER);
-            TrueUtils.removeParent(itemLayoutView);
-            ViewGroup.LayoutParams lp = parent.getLayoutParams();
-            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-            itemLayoutView.setLayoutParams(lp);
-            return onCreateHeaderHolder(itemLayoutView, parent);
+            Object header = headers.get(type - VIEW_TYPES.HEADER);
+            if (header instanceof View) {
+                itemLayoutView = (View) header;
+                TrueUtils.removeParent(itemLayoutView);
+                ViewGroup.LayoutParams lp = parent.getLayoutParams();
+                lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                itemLayoutView.setLayoutParams(lp);
+                return onCreateHeaderHolder(itemLayoutView, parent);
+            } else {
+                return onCreateHeaderHolder(parent);
+            }
         } else if (type <= VIEW_TYPES.FOOTER) {
-            itemLayoutView = footers.get(type - VIEW_TYPES.FOOTER);
-            TrueUtils.removeParent(itemLayoutView);
-            ViewGroup.LayoutParams lp = parent.getLayoutParams();
-            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-            itemLayoutView.setLayoutParams(lp);
-            return onCreateFooterHolder(itemLayoutView, parent);
+            Object footer = footers.get(type - VIEW_TYPES.FOOTER);
+            if (footer instanceof View) {
+                itemLayoutView = (View) footer;
+                TrueUtils.removeParent(itemLayoutView);
+                ViewGroup.LayoutParams lp = parent.getLayoutParams();
+                lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                itemLayoutView.setLayoutParams(lp);
+                return onCreateFooterHolder(itemLayoutView, parent);
+            } else {
+                return onCreateFooterHolder(parent);
+            }
         } else return onCreateOtherHolder(parent, type);
     }
 
@@ -480,11 +507,11 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int type = getItemType(position);
         if (type == VIEW_TYPES.NORMAL) {
-            onBindNormalHolder((VH) holder, position, getItem(getRelativeItemPosition(position)));
+            onBindHolder((VH) holder, position, getItem(getRelativeItemPosition(position)));
         } else if (type >= VIEW_TYPES.HEADER) {
-            onBindHeaderHolder((DefaultHeaderViewHolder) holder, position);
+            onBindHeaderHolder(holder, position);
         } else if (type <= VIEW_TYPES.FOOTER) {
-            onBindFooterHolder((DefaultFooterViewHolder) holder, position);
+            onBindFooterHolder(holder, position);
         } else onBindOtherHolder(holder, position);
     }
 
@@ -499,6 +526,10 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
         return new DefaultHeaderViewHolder(v);
     }
 
+    protected <FH extends RecyclerView.ViewHolder> FH onCreateHeaderHolder(ViewGroup parent) {
+        return null;
+    }
+
     /**
      * You must override this method for change footer holder.
      *
@@ -510,13 +541,17 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
         return new DefaultFooterViewHolder(v);
     }
 
+    protected <FH extends RecyclerView.ViewHolder> FH onCreateFooterHolder(ViewGroup parent) {
+        return null;
+    }
+
     /**
      * You must override this method for change VIEW_TYPES$NORMAL holder.
      *
      * @param parent - root element
      * @return DefaultViewHolder(v);
      */
-    protected RecyclerView.ViewHolder onCreateNormalHolder(ViewGroup parent) {
+    protected RecyclerView.ViewHolder onCreateHolder(ViewGroup parent) {
         return new DefaultViewHolder(parent);
     }
 
@@ -531,15 +566,15 @@ public abstract class TrueRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
         return new DefaultViewHolder(parent);
     }
 
-    public void onBindNormalHolder(VH holder, int position, T model) {
+    public void onBindHolder(VH holder, int position, T model) {
 
     }
 
-    public void onBindHeaderHolder(DefaultHeaderViewHolder holder, int position) {
+    public void onBindHeaderHolder(RecyclerView.ViewHolder holder, int position) {
 
     }
 
-    public void onBindFooterHolder(DefaultFooterViewHolder holder, int position) {
+    public void onBindFooterHolder(RecyclerView.ViewHolder holder, int position) {
 
     }
 

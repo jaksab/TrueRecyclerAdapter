@@ -21,13 +21,13 @@ public class DemoAdapter extends TrueRecyclerAdapter<DemoModel, DemoAdapter.Demo
     }
 
     @Override
-    protected RecyclerView.ViewHolder onCreateNormalHolder(ViewGroup parent) {
+    protected RecyclerView.ViewHolder onCreateHolder(ViewGroup parent) {
         return new DemoViewHolder(LayoutInflater.from(context)
                 .inflate(R.layout.item_recycler, parent, false));
     }
 
     @Override
-    public void onBindNormalHolder(DemoAdapter.DemoViewHolder holder, int position, DemoModel model) {
+    public void onBindHolder(DemoAdapter.DemoViewHolder holder, int position, DemoModel model) {
         holder.textView.setText(model.getText());
     }
 
