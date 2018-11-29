@@ -1,14 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 18
-        versionName "1.1.2"
+        minSdkVersion 17
+        targetSdkVersion 28
+        versionCode 20
+        versionName "1.1.4"
     }
     buildTypes {
         release {
@@ -37,7 +36,7 @@ ext {
     siteUrl = 'https://github.com/jaksab/TrueRecyclerAdapter'
     gitUrl = 'https://github.com/jaksab/TrueRecyclerAdapter.git'
 
-    libraryVersion = '1.1.2'
+    libraryVersion = '1.1.4'
 
     developerId = 'jaksab'
     developerName = 'Andrii Konovalenko'
@@ -51,8 +50,8 @@ ext {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:appcompat-v7:25.4.0'
-    implementation 'com.android.support:design:25.4.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
